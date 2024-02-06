@@ -1,0 +1,53 @@
+[2024-02-06 04:49:11] [1] [INFO] [TestNG] Running:
+  /Users/denyskukikov/Library/Caches/JetBrains/IntelliJIdea2023.2/temp-testng-customsuite.xml
+
+[2024-02-06 04:49:14] [1] [INFO] Request method:	GET
+Request URI:	https://fakestoreapi.com/users/1
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:			<none>
+HTTP/1.1 200 OK
+Date: Tue, 06 Feb 2024 16:49:14 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"120-HNMhv14aQeBJetA9fBvavCZ+gdk"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=oyBVc17QR2BvR0UDOPvZK0tT%2F9Xs2wrzXiyojFo%2Bm7yYijnZQpdi4rL1RaGfS0Kow9bhTqi9KqEqS4Aj7leIAdhhgBBO1Vzj7O6ea64Bk0hzTey7ZX37Rmn1TdS5FH1o07eU"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 8514e29ccf325b8e-VIE
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400
+
+{
+    "address": {
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        },
+        "city": "kilcoole",
+        "street": "new road",
+        "number": 7682,
+        "zipcode": "12926-3874"
+    },
+    "id": 1,
+    "email": "john@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "john",
+        "lastname": "doe"
+    },
+    "phone": "1-570-236-7033",
+    "__v": 0
+}
+
