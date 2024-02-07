@@ -1,0 +1,53 @@
+[2024-02-07 03:08:00] [1] [INFO] [TestNG] Running:
+  /Users/denyskukikov/Library/Caches/JetBrains/IntelliJIdea2023.2/temp-testng-customsuite.xml
+
+[2024-02-07 03:08:03] [1] [INFO] Request method:	POST
+Request URI:	https://fakestoreapi.com/users
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": "3",
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+HTTP/1.1 200 OK
+Date: Wed, 07 Feb 2024 15:08:03 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 8
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"8-h5EdGu1QmHe4OkjsU292jNzSLfE"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=FHIcOn2qggIW0%2B8N2pyo8VRtwr7UVsrNoGqc10vQ5BUNeRrckSkoVwX37xdJc0W0u%2FlV%2FDgDGjSH4rkAhRrd9EmPN%2B0KTCdm2B2l9cyyiOJDacLWsTYb1d9gU6NJpGhd18Ym"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 851c8bc4bc845b30-VIE
+alt-svc: h3=":443"; ma=86400
+
+{
+    "id": 1
+}
+

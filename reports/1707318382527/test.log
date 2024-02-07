@@ -1,0 +1,61 @@
+[2024-02-07 03:06:22] [1] [INFO] [TestNG] Running:
+  /Users/denyskukikov/Library/Caches/JetBrains/IntelliJIdea2023.2/temp-testng-customsuite.xml
+
+[2024-02-07 03:06:25] [1] [INFO] Request method:	POST
+Request URI:	https://fakestoreapi.com/api/users
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": "3",
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+HTTP/1.1 404 Not Found
+Date: Wed, 07 Feb 2024 15:06:24 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=%2B%2FhwFAJ1mmoWJQKvXPo3JcKTOHmXUvvbNFZXFfD2mSsfSLLeHqX%2F%2F6zerOpswAM6tVbIpAlVGj8nnEGoiEGmzOHrd4Fi28GERh9m4DCIVb9y5x8AReDK3fXLFt5DbIX1wcCd"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 851c895eea905b6d-VIE
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Error</title>
+  </head>
+  <body>
+    <pre>Cannot POST /api/users</pre>
+  </body>
+</html>
+

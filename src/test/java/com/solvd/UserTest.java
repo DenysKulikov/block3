@@ -48,17 +48,17 @@ public class UserTest {
     @Test
     public void verifyCreateUser() {
         User user = new User();
-        user.setFirstName("morpheus");
+        user.setFirstName("John");
         user.setJob("leader");
 
         CreateUser createUser = new CreateUser(user.getFirstName(), user.getJob());
         createUser.addProperty("user", user);
 
-        createUser.expectResponseStatus(HttpResponseStatusType.CREATED_201);
+        createUser.expectResponseStatus(HttpResponseStatusType.OK_200);
         createUser.callAPI();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
-                .<String>withPredicate("datePredicate", date -> isDateValid(date) && ZonedDateTime.parse(date).isAfter(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault())));
+                .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
 
         createUser.validateResponse(comparatorContext);
     }

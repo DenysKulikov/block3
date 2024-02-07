@@ -1,6 +1,3 @@
 {
-  "name": "${user.firstName}",
-  "job": "${user.job}",
-  "id": "type:String",
-  "createdAt": "predicate:datePredicate"
+  id:"type:Integer"
 }
