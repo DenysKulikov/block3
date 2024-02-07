@@ -9,13 +9,13 @@
     "number": "type:Integer",
     "zipcode": "type:String"
   },
-  "id": "${user.id}",
+  "id": ${user.id},
   "email": "type:String",
   "username": "type:String",
   "password": "type:String",
   "name": {
-    "firstname": "${user.firstname}",
-    "lastname": "${user.lastname}"
+    "firstname": "type:String",
+    "lastname": "type:String"
   },
   "phone": "predicate:phonePredicate",
   "__v": "skip"
