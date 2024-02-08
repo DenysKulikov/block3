@@ -3,7 +3,7 @@
   "username":"johnd",
   "password":"m38rmF$",
   "name":{
-    "firstname":"John",
+    "firstname":"${user.firstName}",
     "lastname":"Doe"
   },
   "address":{

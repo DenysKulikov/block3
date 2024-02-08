@@ -30,27 +30,25 @@ public class UserTest {
                 .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
 
         getUserById.validateResponse(comparatorContext);
-        getUserById.callAPI();
     }
 
     @Test
-    public void verifyDeleteUser() {
+    public void verifyDeleteUserTest() {
         User user = new User();
         user.setId(7);
 
         DeleteUser deleteUser = new DeleteUser(user.getId());
-        deleteUser.addProperty("user", user);
 
         deleteUser.expectResponseStatus(HttpResponseStatusType.OK_200);
         deleteUser.callAPI();
     }
 
     @Test
-    public void verifyCreateUser() {
+    public void verifyCreateUserTest() {
         User user = new User();
         user.setFirstName("John");
 
-        CreateUser createUser = new CreateUser(user.getFirstName());
+        CreateUser createUser = new CreateUser();
         createUser.addProperty("user", user);
 
         createUser.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -63,7 +61,7 @@ public class UserTest {
     }
 
     @Test
-    public void verifyUpdateUserPut() {
+    public void verifyUpdateUserPutTest() {
         User user = new User();
         user.setId(7);
         user.setFirstName("John");
@@ -81,7 +79,7 @@ public class UserTest {
     }
 
     @Test
-    public void verifyUpdateUserPatch() {
+    public void verifyUpdateUserPatchTest() {
         User user = new User();
         user.setId(7);
         user.setFirstName("John");
@@ -96,15 +94,6 @@ public class UserTest {
                 .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
 
         updateUserPatch.validateResponse(comparatorContext);
-    }
-
-    private static boolean isDateValid(String date) {
-        try {
-            ZonedDateTime.parse(date);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
     }
 
     private static boolean isPhoneValid(String phone) {
