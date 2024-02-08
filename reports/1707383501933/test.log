@@ -1,0 +1,289 @@
+[2024-02-08 09:11:41] [1] [INFO] [TestNG] Running:
+  C:\Users\denis\AppData\Local\JetBrains\IntelliJIdea2023.2\temp-testng-customsuite.xml
+
+[2024-02-08 09:11:44] [1] [INFO] Request method:	POST
+Request URI:	https://fakestoreapi.com/users
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": "3",
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+HTTP/1.1 200 OK
+Date: Thu, 08 Feb 2024 09:11:44 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 9
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"9-hVv0cNJophUD7CGn+ZqXp8tVGo0"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=VWPaL%2BGDSyT90xXynJK8DxfsI8wjgSUbd9oDjyKuptu2KhMtxFhEAzLPBn6h7oJ2jBD7h0fihaZdMEC1j2e0g87JrQz33gJKjmRt2uckaA7%2BlFSuOcqDwmk9ghwjey1SzaWg"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 8522bf31dd685ab6-VIE
+alt-svc: h3=":443"; ma=86400
+
+{
+    "id": 11
+}
+
+[2024-02-08 09:11:45] [1] [INFO] Request method:	DELETE
+Request URI:	https://fakestoreapi.com/users/7
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:			<none>
+HTTP/1.1 200 OK
+Date: Thu, 08 Feb 2024 09:11:44 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"127-rM7MA5ark1sNtXw3mbmqC2YA4Cg"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=wdLegaWqsWeLNXctvH3NGEYYZuq3g2%2FFJzBlgFWFAR8AS5oAS9xcXQas1gYUEsW%2BGqyKP0nz3h5kqkmYJgWWw3SIotnNzA5eIxbWnixXpb5O29in94jia5q%2FK3CXlvMg3E7K"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 8522bf3849655a47-VIE
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400
+
+{
+    "address": {
+        "geolocation": {
+            "lat": "10.3456",
+            "long": "20.6419"
+        },
+        "city": "fresno",
+        "street": "saddle st",
+        "number": 1342,
+        "zipcode": "96378-0245"
+    },
+    "id": 7,
+    "email": "miriam@gmail.com",
+    "username": "snyder",
+    "password": "f238&@*$",
+    "name": {
+        "firstname": "miriam",
+        "lastname": "snyder"
+    },
+    "phone": "1-123-943-0563",
+    "__v": 0
+}
+
+[2024-02-08 09:11:45] [1] [INFO] Request method:	GET
+Request URI:	https://fakestoreapi.com/users/1
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:			<none>
+HTTP/1.1 200 OK
+Date: Thu, 08 Feb 2024 09:11:45 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"120-HNMhv14aQeBJetA9fBvavCZ+gdk"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=rn%2FpuA4lHxBUvu%2BkyaRRWBpEq6GhCrJcSsUIGSqGvmh4YIQAHeRQd1HDfKNtozIOZ3GKcH7pG6R6%2FX93hYe41xuTB0C0Id6Y5x24jLpzFPb1Xm2qa9BKaPiV1x0Sh7VNFRPg"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 8522bf3ace245a84-VIE
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400
+
+{
+    "address": {
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        },
+        "city": "kilcoole",
+        "street": "new road",
+        "number": 7682,
+        "zipcode": "12926-3874"
+    },
+    "id": 1,
+    "email": "john@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "john",
+        "lastname": "doe"
+    },
+    "phone": "1-570-236-7033",
+    "__v": 0
+}
+
+[2024-02-08 09:11:46] [1] [INFO] Request method:	PATCH
+Request URI:	https://fakestoreapi.com/users/7
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": 3,
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+HTTP/1.1 200 OK
+Date: Thu, 08 Feb 2024 09:11:46 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"113-gkQtMxsDL5jIxe+k3ZyUYz7Mk8k"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=S5N27VYvlcosOBiUrJA1rQ7oLwLH%2F0RzUgTsxA1SLjGJPKpOf3YDo3%2BaCDGfTYAS9%2FpwIjTc8%2FjARBYVKjiZ2BgnZ4%2BePpVCC77Cd0qGKyo6rA13Fvhxuzjpp4O6H9f%2FtlBP"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 8522bf421f185adb-VIE
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400
+
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": 3,
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+
+[2024-02-08 09:11:47] [1] [INFO] Request method:	PUT
+Request URI:	https://fakestoreapi.com/users/7
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": 3,
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+HTTP/1.1 200 OK
+Date: Thu, 08 Feb 2024 09:11:46 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"113-gkQtMxsDL5jIxe+k3ZyUYz7Mk8k"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=lqbs6zUPVxkM68qqQ4tvvSfeYd3QvGK6wa6nWpZwwy8JhbRakK0hYKgJ%2B6FX272y89DQ97xEg%2BRtYm9fdDc2gunewllIfS%2FLmL59OKGSOovP5IwQX6X5BIQRiY7PzMj2BSIT"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 8522bf440c635b09-VIE
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400
+
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": 3,
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+

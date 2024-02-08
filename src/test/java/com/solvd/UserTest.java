@@ -36,12 +36,12 @@ public class UserTest {
     @Test
     public void verifyDeleteUser() {
         User user = new User();
-        user.setId(2);
+        user.setId(7);
 
         DeleteUser deleteUser = new DeleteUser(user.getId());
         deleteUser.addProperty("user", user);
 
-        deleteUser.expectResponseStatus(HttpResponseStatusType.NO_CONTENT_204);
+        deleteUser.expectResponseStatus(HttpResponseStatusType.OK_200);
         deleteUser.callAPI();
     }
 
@@ -65,9 +65,8 @@ public class UserTest {
     @Test
     public void verifyUpdateUserPut() {
         User user = new User();
-        user.setId(2);
-        user.setFirstName("morpheus");
-        user.setJob("zion resident");
+        user.setId(7);
+        user.setFirstName("John");
 
         UpdateUserPut updateUserPut = new UpdateUserPut(user.getId());
         updateUserPut.addProperty("user", user);
@@ -76,7 +75,7 @@ public class UserTest {
         updateUserPut.callAPI();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
-                .<String>withPredicate("datePredicate", date -> isDateValid(date) && ZonedDateTime.parse(date).isAfter(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault())));
+                .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
 
         updateUserPut.validateResponse(comparatorContext);
     }
@@ -84,9 +83,8 @@ public class UserTest {
     @Test
     public void verifyUpdateUserPatch() {
         User user = new User();
-        user.setId(2);
-        user.setFirstName("morpheus");
-        user.setJob("zion resident");
+        user.setId(7);
+        user.setFirstName("John");
 
         UpdateUserPatch updateUserPatch = new UpdateUserPatch(user.getId());
         updateUserPatch.addProperty("user", user);
@@ -95,7 +93,7 @@ public class UserTest {
         updateUserPatch.callAPI();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
-                .<String>withPredicate("datePredicate", date -> isDateValid(date) && ZonedDateTime.parse(date).isAfter(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault())));
+                .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
 
         updateUserPatch.validateResponse(comparatorContext);
     }
@@ -110,7 +108,6 @@ public class UserTest {
     }
 
     private static boolean isPhoneValid(String phone) {
-        // Use a regular expression to validate the phone number format
         Pattern pattern = Pattern.compile("^\\d{1}-\\d{3}-\\d{3}-\\d{4}$");
         Matcher matcher = pattern.matcher(phone);
         return matcher.matches();

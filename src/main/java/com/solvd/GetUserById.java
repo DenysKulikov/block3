@@ -6,7 +6,7 @@ import com.zebrunner.carina.api.annotation.ResponseTemplatePath;
 import com.zebrunner.carina.api.apitools.builder.NotStringValuesProcessor;
 import com.zebrunner.carina.api.http.HttpMethodType;
 
-@Endpoint(url = "${config.api_url1}/users/${id}", methodType = HttpMethodType.GET)
+@Endpoint(url = "${config.api_url}/users/${id}", methodType = HttpMethodType.GET)
 @ResponseTemplatePath(path = "api/users/get_user_rs.json")
 public class GetUserById extends AbstractApiMethodV2 {
     public GetUserById(int id) {
