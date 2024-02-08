@@ -4,7 +4,7 @@
   "password":"m38rmF$",
   "name":{
     "firstname":"${user.firstName}",
-    "lastname":"Doe"
+    "lastname":"${user.lastName}"
   },
   "address":{
     "city":"kilcoole",

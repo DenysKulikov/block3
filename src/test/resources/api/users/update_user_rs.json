@@ -4,7 +4,7 @@
   "password": "type:String",
   "name": {
     "firstname": "${user.firstName}",
-    "lastname": "type:String"
+    "lastname": "${user.lastName}"
   },
   "address": {
     "city": "type:String",

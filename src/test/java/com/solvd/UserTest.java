@@ -5,10 +5,6 @@ import com.zebrunner.carina.api.apitools.validation.JsonComparatorContext;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import org.testng.annotations.Test;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +16,7 @@ public class UserTest {
         user.setFirstName("john");
         user.setLastName("doe");
 
-        GetUserById getUserById = new GetUserById(user.getId());
+        GetUserByIdMethod getUserById = new GetUserByIdMethod(user.getId());
         getUserById.addProperty("user", user);
 
         getUserById.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -37,7 +33,7 @@ public class UserTest {
         User user = new User();
         user.setId(7);
 
-        DeleteUser deleteUser = new DeleteUser(user.getId());
+        DeleteUserMethod deleteUser = new DeleteUserMethod(user.getId());
 
         deleteUser.expectResponseStatus(HttpResponseStatusType.OK_200);
         deleteUser.callAPI();
@@ -47,8 +43,9 @@ public class UserTest {
     public void verifyCreateUserTest() {
         User user = new User();
         user.setFirstName("John");
+        user.setLastName("Doe");
 
-        CreateUser createUser = new CreateUser();
+        CreateUserMethod createUser = new CreateUserMethod();
         createUser.addProperty("user", user);
 
         createUser.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -65,8 +62,9 @@ public class UserTest {
         User user = new User();
         user.setId(7);
         user.setFirstName("John");
+        user.setLastName("Doe");
 
-        UpdateUserPut updateUserPut = new UpdateUserPut(user.getId());
+        UpdateUserPutMethod updateUserPut = new UpdateUserPutMethod(user.getId());
         updateUserPut.addProperty("user", user);
 
         updateUserPut.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -83,8 +81,9 @@ public class UserTest {
         User user = new User();
         user.setId(7);
         user.setFirstName("John");
+        user.setLastName("Doe");
 
-        UpdateUserPatch updateUserPatch = new UpdateUserPatch(user.getId());
+        UpdateUserPatchMethod updateUserPatch = new UpdateUserPatchMethod(user.getId());
         updateUserPatch.addProperty("user", user);
 
         updateUserPatch.expectResponseStatus(HttpResponseStatusType.OK_200);
