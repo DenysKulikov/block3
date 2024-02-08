@@ -49,9 +49,8 @@ public class UserTest {
     public void verifyCreateUser() {
         User user = new User();
         user.setFirstName("John");
-        user.setJob("leader");
 
-        CreateUser createUser = new CreateUser(user.getFirstName(), user.getJob());
+        CreateUser createUser = new CreateUser(user.getFirstName());
         createUser.addProperty("user", user);
 
         createUser.expectResponseStatus(HttpResponseStatusType.OK_200);

@@ -1,0 +1,53 @@
+[2024-02-08 08:11:47] [1] [INFO] [TestNG] Running:
+  C:\Users\denis\AppData\Local\JetBrains\IntelliJIdea2023.2\temp-testng-customsuite.xml
+
+[2024-02-08 08:11:50] [1] [INFO] Request method:	POST
+Request URI:	https://fakestoreapi.com/users
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Cookies:		<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Body:
+{
+    "email": "John@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "address": {
+        "city": "kilcoole",
+        "street": "7835 new road",
+        "number": "3",
+        "zipcode": "12926-3874",
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        }
+    },
+    "phone": "1-570-236-7033"
+}
+HTTP/1.1 200 OK
+Date: Thu, 08 Feb 2024 08:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 9
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Etag: W/"9-hVv0cNJophUD7CGn+ZqXp8tVGo0"
+X-Powered-By: Express
+CF-Cache-Status: DYNAMIC
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=%2FVbFb%2FhSnJhSIZ6s54vKDkbwktrhlawY52EdBXTMvtikbfOSZMfhtxxU7T3sC8oeqSH41amTlW4BzTfjEirrd%2Bdw831EK85deBqzSuOahprGkW6MW6e3LcqERmYlT0Fyzfz3"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 852267741c785a38-VIE
+alt-svc: h3=":443"; ma=86400
+
+{
+    "id": 11
+}
+
