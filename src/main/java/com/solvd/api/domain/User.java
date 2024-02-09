@@ -1,4 +1,4 @@
-package com.solvd.domain;
+package com.solvd.api.domain;
 
 public class User {
     private int id;
