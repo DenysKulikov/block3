@@ -1,0 +1,22 @@
+{
+  "address": {
+    "geolocation": {
+      "lat": "type:String",
+      "long": "type:String"
+    },
+    "city": "type:String",
+    "street": "type:String",
+    "number": "type:Integer",
+    "zipcode": "type:String"
+  },
+  "id": ${user.id},
+  "email": "type:String",
+  "username": "type:String",
+  "password": "type:String",
+  "name": {
+    "firstname": "type:String",
+    "lastname": "type:String"
+  },
+  "phone": "predicate:phonePredicate",
+  "__v": "skip"
+}
