@@ -12,9 +12,6 @@ public class Header extends AbstractUIObject {
     @FindBy(xpath = ".//*[@type= 'search']")
     private ExtendedWebElement searchInput;
 
-    @FindBy(xpath = ".//*[@type= 'submit']")
-    private ExtendedWebElement searchButton;
-
     public Header(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }

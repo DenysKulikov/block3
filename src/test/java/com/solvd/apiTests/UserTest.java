@@ -20,7 +20,6 @@ public class UserTest {
         GetUserByIdMethod getUserById = new GetUserByIdMethod(user.getId());
         getUserById.addProperty("user", user);
 
-        getUserById.expectResponseStatus(HttpResponseStatusType.OK_200);
         getUserById.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
@@ -36,7 +35,6 @@ public class UserTest {
 
         DeleteUserMethod deleteUser = new DeleteUserMethod(user.getId());
 
-        deleteUser.expectResponseStatus(HttpResponseStatusType.OK_200);
         deleteUser.callAPIExpectSuccess();
     }
 
@@ -49,7 +47,6 @@ public class UserTest {
         CreateUserMethod createUser = new CreateUserMethod();
         createUser.addProperty("user", user);
 
-        createUser.expectResponseStatus(HttpResponseStatusType.OK_200);
         createUser.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
@@ -68,7 +65,6 @@ public class UserTest {
         UpdateUserPutMethod updateUserPut = new UpdateUserPutMethod(user.getId());
         updateUserPut.addProperty("user", user);
 
-        updateUserPut.expectResponseStatus(HttpResponseStatusType.OK_200);
         updateUserPut.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
@@ -87,7 +83,6 @@ public class UserTest {
         UpdateUserPatchMethod updateUserPatch = new UpdateUserPatchMethod(user.getId());
         updateUserPatch.addProperty("user", user);
 
-        updateUserPatch.expectResponseStatus(HttpResponseStatusType.OK_200);
         updateUserPatch.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
