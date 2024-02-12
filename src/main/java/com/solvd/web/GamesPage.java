@@ -23,7 +23,7 @@ public class GamesPage extends AbstractPage {
         return productCards;
     }
 
-    public ExtendedWebElement getTitleElement() {
-        return title;
+    public boolean isTitleElementIsPresent() {
+        return waitUntil(input -> title.isElementPresent(), 10);
     }
 }

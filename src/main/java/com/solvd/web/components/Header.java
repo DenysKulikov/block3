@@ -16,8 +16,8 @@ public class Header extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getSearchInput() {
-        return searchInput;
+    public boolean isSearchInputIsPresent() {
+        return waitUntil(value -> searchInput.isElementPresent(), 10);
     }
 
     public String getSearchInputPlaceholder() {

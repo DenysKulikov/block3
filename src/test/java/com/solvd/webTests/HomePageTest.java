@@ -2,19 +2,17 @@ package com.solvd.webTests;
 
 import com.solvd.web.*;
 import com.solvd.web.components.Header;
+import com.solvd.web.components.PotentialGift;
 import com.solvd.web.components.ProductCard;
 import com.solvd.web.components.cart.CartProduct;
 import com.solvd.web.components.cart.PopupWindow;
 import com.zebrunner.carina.core.AbstractTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
 import java.util.List;
 
 public class HomePageTest extends AbstractTest {
@@ -43,20 +41,19 @@ public class HomePageTest extends AbstractTest {
 
         Header header = homePage.getHeader();
 
-        Assert.assertTrue(header.getSearchInput().isElementPresent(),
+        Assert.assertTrue(header.isSearchInputIsPresent(),
                 "Search input is not present");
 
-        Assert.assertEquals(homePage.getHeader().getSearchInputPlaceholder(), "Пошук товарів",
+        Assert.assertEquals(header.getSearchInputPlaceholder(), "Пошук товарів",
                 "Search input has an incorrect placeholder");
 
         header.typeSearchInputValue(brandName);
 
         SearchPage searchPage = header.clickEnter();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(searchPage.getTitleElement()));
+        searchPage.isTitleElementIsPresent();
 
-        String actualText = searchPage.getTitleElement().getText();
+        String actualText = searchPage.getTitleText();
         Assert.assertTrue(actualText.toLowerCase().contains(brandName.toLowerCase()),
                 "Expected text not found in title element");
 
@@ -71,15 +68,32 @@ public class HomePageTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        Assert.assertTrue(homePage.getHeader().getSearchInput().isElementPresent(),
+        Assert.assertTrue(homePage.getHeader().isSearchInputIsPresent(),
                 "Search input is not present");
 
         homePage.clickGiftIdeasButton();
 
-        boolean isGiftPriceRangeStartVisible = homePage.isGameZoneButtonPresent();
+        boolean isGiftPriceRangeStartPresent = homePage.isGiftPriceRangeStartIsPresent();
 
-        Assert.assertTrue(isGiftPriceRangeStartVisible, "Gift price range start is not visible");
+        Assert.assertTrue(isGiftPriceRangeStartPresent, "Gift price range start is not present");
 
+        boolean isGiftPriceRangeEndPresent = homePage.isGiftPriceRangeEndIsPresent();
+        Assert.assertTrue(isGiftPriceRangeEndPresent, "Gift price range end is not present");
+
+        double giftPriceRangeStart = homePage.getGiftPriceRangeStart();
+        double giftPriceRangeEnd = homePage.getGiftPriceRangeEnd();
+
+        homePage.clickGeneratePotentialGiftsButton();
+
+        homePage.isPotentialGiftsIsPresent();
+
+        List<PotentialGift> potentialGifts = homePage.getPotentialGifts();
+
+        for (PotentialGift potentialGift : potentialGifts) {
+            double potentialGiftPrice = potentialGift.getPotentialGiftPrice();
+            Assert.assertTrue(potentialGiftPrice >= giftPriceRangeStart && potentialGiftPrice <= giftPriceRangeEnd,
+                    "Potential gift price is not within the specified range");
+        }
     }
 
     @Test(dataProvider = "gameNames")
@@ -89,7 +103,7 @@ public class HomePageTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        Assert.assertTrue(homePage.getHeader().getSearchInput().isElementPresent(),
+        Assert.assertTrue(homePage.getHeader().isSearchInputIsPresent(),
                 "Search input is not present");
 
         Assert.assertTrue(homePage.isGameZoneButtonPresent(),
@@ -97,17 +111,16 @@ public class HomePageTest extends AbstractTest {
 
         GameZonePage gameZonePage = homePage.clickGameZoneButton();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(gameZonePage.getTitleElement()));
+        gameZonePage.isTitleElementIsPresent();
 
         GamesPage gamesPage = gameZonePage.clickGamesButton();
 
-        wait.until(ExpectedConditions.visibilityOf(gamesPage.getTitleElement()));
+        gamesPage.isTitleElementIsPresent();
 
         List<ProductCard> productCards = gamesPage.getProductCards();
 
         boolean gameFound = productCards.stream()
-                .anyMatch(cartProduct -> cartProduct.getTitleElement().getText().contains(gameName));
+                .anyMatch(cartProduct -> cartProduct.getTitleText().contains(gameName));
 
         Assert.assertTrue(gameFound, "Page doesn't contains provided game");
     }
@@ -121,60 +134,42 @@ public class HomePageTest extends AbstractTest {
 
         Header header = homePage.getHeader();
 
-        Assert.assertTrue(header.getSearchInput().isElementPresent(),
+        Assert.assertTrue(header.isSearchInputIsPresent(),
                 "Search input is not present");
 
         header.typeSearchInputValue(brandName);
 
         SearchPage searchPage = header.clickEnter();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(searchPage.getTitleElement()));
+        searchPage.isTitleElementIsPresent();
 
         List<ProductCard> productCards = searchPage.getProductCards();
         ProductCard firstProductCard = productCards.get(0);
-        ProductCard secondProductCard = productCards.get(1);
 
-        String expectedFirstProductTitle = firstProductCard.getTitleText();
-        String expectedSecondProductTitle = firstProductCard.getTitleText();
+        String expectedProductTitle = firstProductCard.getTitleText();
+        double expectedProductPrice = firstProductCard.getProductPrice();
 
-        Assert.assertTrue(firstProductCard.getButton().isElementPresent());
-        firstProductCard.getButton().click();
-        wait.until(ExpectedConditions.visibilityOf(searchPage.getSuccessAddedButton()));
+        Assert.assertTrue(firstProductCard.isAddToCartButtonIsPresent());
+        PopupWindow popupWindow = firstProductCard.addToCartButton();
+        searchPage.isSuccessAddedButtonIsPresent();
 
-        if (secondProductCard.getButton().isElementPresent()) {
-            secondProductCard.getButton().click();
-            PopupWindow popupWindow = searchPage.getPopupWindow();
-            wait.until(ExpectedConditions.visibilityOf(popupWindow.getButton()));
-        }
+        popupWindow.isButtonToCartPageIsPresent();
 
-        PopupWindow popupWindow = searchPage.getPopupWindow();
+        CartPage cartPage = popupWindow.clickButtonToCartPage();
+        cartPage.isProductsIsPresent();
 
-        CartPage cartPage = new CartPage(driver);
-
-        popupWindow.getButton().click();
-        wait.until(ExpectedConditions.visibilityOf(cartPage.getTitleElement()));
-
-        List<CartProduct> products = cartPage.getProducts();
-        double productsTotalPrice = products.stream()
-                .mapToDouble(product -> Double.parseDouble(product.getCurrentPrice().
-                        getText().replace(" ", "")))
+        List<CartProduct> cartProducts = cartPage.getProducts();
+        double productsTotalPriceInCart = cartProducts.stream()
+                .mapToDouble(CartProduct::getProductPrice)
                 .sum();
 
-        double cartPageTotalPrice = Double.parseDouble(cartPage.getTotalPrice().
-                getText().replace(" ", ""));
+        boolean cartProductContainsBrandName = cartProducts.stream()
+                .anyMatch(cartProduct -> cartProduct.getTitleText().equalsIgnoreCase(expectedProductTitle));
 
-        Assert.assertEquals(productsTotalPrice, cartPageTotalPrice,
-                "Products total price doesn't match cart page total price");
-
-        boolean firstProductContainsBrandName = products.stream()
-                .anyMatch(cartProduct -> cartProduct.getTitleElement().getText().equalsIgnoreCase(expectedFirstProductTitle));
-
-        boolean secondProductContainsBrandName = products.stream()
-                .anyMatch(cartProduct -> cartProduct.getTitleElement().getText().equalsIgnoreCase(expectedSecondProductTitle));
-
-        Assert.assertTrue(firstProductContainsBrandName, "Added product doesn't contain expected title: " + expectedFirstProductTitle);
-        Assert.assertTrue(secondProductContainsBrandName, "Added product doesn't contain expected title: " + expectedSecondProductTitle);
+        Assert.assertEquals(productsTotalPriceInCart, expectedProductPrice,
+                "Price For the cart Product and expected product doesn't match");
+        Assert.assertTrue(cartProductContainsBrandName, "Added product doesn't contain expected title: "
+                + expectedProductTitle);
     }
 
     @Test(dataProvider = "brandNames")
@@ -191,8 +186,7 @@ public class HomePageTest extends AbstractTest {
 
         SearchPage searchPage = header.clickEnter();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(searchPage.getTitleElement()));
+        searchPage.isTitleElementIsPresent();
 
         List<ProductCard> productCards = searchPage.getProductCards();
 

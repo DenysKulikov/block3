@@ -1,19 +1,14 @@
 package com.solvd.web;
 
 import com.solvd.web.components.Header;
+import com.solvd.web.components.PotentialGift;
 import com.zebrunner.carina.utils.config.Configuration;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.Optional;
+import java.util.List;
 
 public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@class = 'ui-library-stickyContainer-1244']")
@@ -27,6 +22,18 @@ public class HomePage extends AbstractPage {
 
     @FindBy(xpath = "//input[@type = 'number'][1]")
     private ExtendedWebElement giftPriceRangeStart;
+
+    @FindBy(xpath = "//input[@type = 'number'][2]")
+    private ExtendedWebElement giftPriceRangeEnd;
+
+    @FindBy(xpath = "//button[@class= 'submit-prices']")
+    private ExtendedWebElement generatePotentialGiftsButton;
+
+    @FindBy(xpath = "//button[text() = 'Згенерувати ще']")
+    private ExtendedWebElement generateMorePotentialGiftsButton;
+
+    @FindBy(xpath = "//div[@class = 'goods-item-content']")
+    private List<PotentialGift> potentialGifts;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -51,20 +58,34 @@ public class HomePage extends AbstractPage {
     }
 
     public void clickGiftIdeasButton() {
-        gameZoneButton.click();
+        giftIdeasButton.click();
     }
 
     public double getGiftPriceRangeStart() {
         return Double.parseDouble(giftPriceRangeStart.getAttribute("value"));
     }
 
-    public static boolean isGiftPriceRangeStartVisible(WebDriver driver) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@type = 'number'][1]"))));
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
+    public boolean isGiftPriceRangeStartIsPresent() {
+        return waitUntil(input -> giftPriceRangeStart.isElementPresent(), 10);
+    }
+
+    public double getGiftPriceRangeEnd() {
+        return Double.parseDouble(giftPriceRangeEnd.getAttribute("value"));
+    }
+
+    public boolean isGiftPriceRangeEndIsPresent() {
+        return waitUntil(input -> giftPriceRangeEnd.isElementPresent(), 10);
+    }
+
+    public void clickGeneratePotentialGiftsButton() {
+        generatePotentialGiftsButton.click();
+    }
+
+    public boolean isPotentialGiftsIsPresent() {
+        return waitUntil(value -> !potentialGifts.isEmpty(), 10);
+    }
+
+    public List<PotentialGift> getPotentialGifts() {
+        return potentialGifts;
     }
 }

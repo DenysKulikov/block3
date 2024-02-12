@@ -17,15 +17,11 @@ public class CartProduct extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getTitleElement() {
-        return titleElement;
-    }
-
     public String getTitleText() {
         return titleElement.getText();
     }
 
-    public ExtendedWebElement getCurrentPrice() {
-        return currentPrice;
+    public double getProductPrice() {
+        return Double.parseDouble(currentPrice.getText().replace(" ", ""));
     }
 }

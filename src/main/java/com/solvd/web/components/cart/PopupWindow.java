@@ -15,12 +15,16 @@ public class PopupWindow extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getButton() {
-        return buttonToCartPage;
+    public PopupWindow(WebDriver driver) {
+        super(driver);
     }
 
     public CartPage clickButtonToCartPage() {
         buttonToCartPage.click();
         return new CartPage(getDriver());
+    }
+
+    public boolean isButtonToCartPageIsPresent() {
+        return waitUntil(input -> buttonToCartPage.isElementPresent(), 10);
     }
 }

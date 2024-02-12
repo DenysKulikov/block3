@@ -15,22 +15,15 @@ public class CartPage extends AbstractPage {
     @FindBy(xpath = "//*[@class= 'goods-tile-container']")
     private List<CartProduct> products;
 
-    @FindBy(css = "div.total-number span.value")
-    private ExtendedWebElement totalPrice;
-
     public CartPage(WebDriver driver) {
         super(driver);
-    }
-
-    public ExtendedWebElement getTitleElement() {
-        return title;
     }
 
     public List<CartProduct> getProducts() {
         return products;
     }
 
-    public ExtendedWebElement getTotalPrice() {
-        return totalPrice;
+    public boolean isProductsIsPresent() {
+        return waitUntil(value -> !products.isEmpty(), 10);
     }
 }

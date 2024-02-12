@@ -16,16 +16,12 @@ public class GameZonePage extends AbstractPage {
         super(driver);
     }
 
-    public ExtendedWebElement getGamesButton() {
-        return gamesButton;
-    }
-
-    public ExtendedWebElement getTitleElement() {
-        return title;
-    }
-
     public GamesPage clickGamesButton() {
         gamesButton.click();
         return new GamesPage(getDriver());
+    }
+
+    public boolean isTitleElementIsPresent() {
+        return waitUntil(input -> title.isElementPresent(), 10);
     }
 }

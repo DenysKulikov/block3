@@ -39,15 +39,19 @@ public class SearchPage extends AbstractPage {
         return productCards;
     }
 
-    public ExtendedWebElement getTitleElement() {
-        return title;
-    }
-
     public PopupWindow getPopupWindow() {
         return popupWindow;
     }
 
-    public ExtendedWebElement getSuccessAddedButton() {
-        return successAddedButton;
+    public boolean isTitleElementIsPresent() {
+        return waitUntil(input -> title.isElementPresent(), 10);
+    }
+
+    public boolean isSuccessAddedButtonIsPresent() {
+        return waitUntil(input -> successAddedButton.isElementPresent(), 10);
+    }
+
+    public String getTitleText() {
+        return title.getText();
     }
 }
