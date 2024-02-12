@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class GameZonePage extends AbstractPage {
-    @FindBy(xpath = "//a[@href = '/uk/games/c1038940/' and contains(@class, 'SubCategorystyled__ImageAction')]")
-    private ExtendedWebElement gamesImage;
+    @FindBy(xpath = "//a[span[text()=\"Ігри\"]]")
+    private ExtendedWebElement gamesButton;
 
     @FindBy(css = "h1.ui-library-heading5-e356")
     private ExtendedWebElement title;
@@ -16,16 +16,16 @@ public class GameZonePage extends AbstractPage {
         super(driver);
     }
 
-    public ExtendedWebElement getGamesImage() {
-        return gamesImage;
+    public ExtendedWebElement getGamesButton() {
+        return gamesButton;
     }
 
     public ExtendedWebElement getTitleElement() {
         return title;
     }
 
-    public GamesPage clickGamesImage() {
-        gamesImage.click();
+    public GamesPage clickGamesButton() {
+        gamesButton.click();
         return new GamesPage(getDriver());
     }
 }
