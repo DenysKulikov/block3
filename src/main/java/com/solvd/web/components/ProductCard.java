@@ -11,6 +11,7 @@ public class ProductCard extends AbstractUIObject {
     private ExtendedWebElement titleElement;
     @FindBy(xpath = ".//button[contains(@class, 'ui-library-buttonPrimary')]")
     private ExtendedWebElement button;
+
     public ProductCard(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }

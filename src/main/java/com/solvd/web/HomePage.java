@@ -18,10 +18,13 @@ import java.util.Optional;
 public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@class = 'ui-library-stickyContainer-1244']")
     private Header header;
+
     @FindBy(xpath = "//*[p[text()='Ігрова зона']]")
     private ExtendedWebElement gameZoneButton;
+
     @FindBy(xpath = "//*[span[text()=\"Ідеї для подарунків\"]]")
     private ExtendedWebElement giftIdeasButton;
+
     @FindBy(xpath = "//input[@type = 'number'][1]")
     private ExtendedWebElement giftPriceRangeStart;
 

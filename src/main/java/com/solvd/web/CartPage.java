@@ -11,6 +11,7 @@ import java.util.List;
 public class CartPage extends AbstractPage {
     @FindBy(css = "h5.cart-header")
     private ExtendedWebElement title;
+
     @FindBy(xpath = "//*[@class= 'goods-tile-container']")
     private List<CartProduct> products;
 

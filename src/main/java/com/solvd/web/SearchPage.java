@@ -14,8 +14,10 @@ import java.util.List;
 public class SearchPage extends AbstractPage {
     @FindBy(xpath = "//*[@class = 'ui-library-stickyContainer-1244']")
     private Header header;
+
     @FindBy(css = "h5.ui-library-heading4-c1b7")
     private ExtendedWebElement title;
+
     @FindBy(xpath = "//*[contains(@class, 'OfferTilestyled__StyledArticle')]")
     private List<ProductCard> productCards;
 
