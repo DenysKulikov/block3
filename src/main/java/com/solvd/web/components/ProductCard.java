@@ -1,6 +1,6 @@
 package com.solvd.web.components;
 
-import com.solvd.web.GamesPage;
+
 import com.solvd.web.components.cart.PopupWindow;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -37,5 +37,9 @@ public class ProductCard extends AbstractUIObject {
 
     public double getProductPrice() {
         return Double.parseDouble(productPrice.getText().replace(" ", ""));
+    }
+
+    public void hoverOnTitle() {
+        titleElement.hover();
     }
 }

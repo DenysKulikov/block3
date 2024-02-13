@@ -1,5 +1,6 @@
 package com.solvd.web.components.cart;
 
+import com.solvd.web.CartPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
@@ -13,6 +14,9 @@ public class CartProduct extends AbstractUIObject {
     @FindBy(css = "div.current-price span.number")
     private ExtendedWebElement currentPrice;
 
+    @FindBy(css = "div.icon-trash")
+    private ExtendedWebElement deleteProduct;
+
     public CartProduct(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -23,5 +27,9 @@ public class CartProduct extends AbstractUIObject {
 
     public double getProductPrice() {
         return Double.parseDouble(currentPrice.getText().replace(" ", ""));
+    }
+
+    public void clickButtonDeleteProduct() {
+        deleteProduct.click();
     }
 }

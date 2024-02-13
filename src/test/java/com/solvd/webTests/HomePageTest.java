@@ -31,34 +31,34 @@ public class HomePageTest extends AbstractTest {
     }
 
     @Test
-    public void verifyIfTextPresenceTest() {
-        String brandName = "iPhone";
-
+    public void verifyIfProductDeletesFromCartTest() {
         WebDriver driver = getDriver();
 
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        Header header = homePage.getHeader();
-
-        Assert.assertTrue(header.isSearchInputIsPresent(),
+        Assert.assertTrue(homePage.getHeader().isSearchInputIsPresent(),
                 "Search input is not present");
 
-        Assert.assertEquals(header.getSearchInputPlaceholder(), "Пошук товарів",
-                "Search input has an incorrect placeholder");
+        List<ProductCard> productCards = homePage.getProductCards();
+        ProductCard productCard = productCards.get(0);
+        productCard.hoverOnTitle();
 
-        header.typeSearchInputValue(brandName);
+        Assert.assertTrue(productCard.isAddToCartButtonIsPresent());
 
-        SearchPage searchPage = header.clickEnter();
+        PopupWindow popupWindow = productCard.addToCartButton();
 
-        searchPage.isTitleElementIsPresent();
+        popupWindow.isButtonToCartPageIsPresent();
 
-        String actualText = searchPage.getTitleText();
-        Assert.assertTrue(actualText.toLowerCase().contains(brandName.toLowerCase()),
-                "Expected text not found in title element");
+        CartPage cartPage = popupWindow.clickButtonToCartPage();
 
-        Assert.assertTrue(driver.getCurrentUrl().contains(brandName),
-                "Url doesn't contain the brand name");
+        cartPage.isProductsIsPresent();
+
+        List<CartProduct> cartProducts = cartPage.getProducts();
+        CartProduct cartProduct = cartProducts.get(0);
+        cartProduct.clickButtonDeleteProduct();
+
+        Assert.assertTrue(homePage.isNumberAddedToCartProductsNotPresent());
     }
 
     @Test
@@ -103,8 +103,13 @@ public class HomePageTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
+        Header header = homePage.getHeader();
+
         Assert.assertTrue(homePage.getHeader().isSearchInputIsPresent(),
                 "Search input is not present");
+
+        Assert.assertEquals(header.getSearchInputPlaceholder(), "Пошук товарів",
+                "Search input has an incorrect placeholder");
 
         Assert.assertTrue(homePage.isGameZoneButtonPresent(),
                 "Game zone button is not present");
@@ -144,6 +149,7 @@ public class HomePageTest extends AbstractTest {
         searchPage.isTitleElementIsPresent();
 
         List<ProductCard> productCards = searchPage.getProductCards();
+        System.out.println(productCards.size());
         ProductCard firstProductCard = productCards.get(0);
 
         String expectedProductTitle = firstProductCard.getTitleText();

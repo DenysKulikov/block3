@@ -2,11 +2,14 @@ package com.solvd.web;
 
 import com.solvd.web.components.Header;
 import com.solvd.web.components.PotentialGift;
+import com.solvd.web.components.ProductCard;
 import com.zebrunner.carina.utils.config.Configuration;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -34,6 +37,12 @@ public class HomePage extends AbstractPage {
 
     @FindBy(xpath = "//div[@class = 'goods-item-content']")
     private List<PotentialGift> potentialGifts;
+
+    @FindBy(xpath = "//*[contains(@class, 'OfferTilestyled__StyledArticle')]")
+    private List<ProductCard> productCards;
+
+    @FindBy(xpath = "//*[contains(@class, 'ui-library-body4Regular-df09 ui-library-badge-a538')]")
+    private ExtendedWebElement numberAddedToCartProducts;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -87,5 +96,13 @@ public class HomePage extends AbstractPage {
 
     public List<PotentialGift> getPotentialGifts() {
         return potentialGifts;
+    }
+
+    public List<ProductCard> getProductCards() {
+        return productCards;
+    }
+
+    public boolean isNumberAddedToCartProductsNotPresent() {
+        return waitUntil(input -> numberAddedToCartProducts.isElementNotPresent(2), 10);
     }
 }
