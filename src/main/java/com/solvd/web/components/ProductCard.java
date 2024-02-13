@@ -13,7 +13,7 @@ public class ProductCard extends AbstractUIObject {
     private ExtendedWebElement titleElement;
 
     @FindBy(xpath = ".//button[contains(@class, 'ui-library-buttonPrimary')]")
-    private ExtendedWebElement button;
+    private ExtendedWebElement addToCartButton;
 
     @FindBy(xpath = ".//span[@class = 'ui-library-subtitle1Bold-399e']")
     private ExtendedWebElement productPrice;
@@ -27,12 +27,12 @@ public class ProductCard extends AbstractUIObject {
     }
 
     public PopupWindow addToCartButton() {
-        button.click();
+        addToCartButton.click();
         return new PopupWindow(getDriver());
     }
 
     public boolean isAddToCartButtonIsPresent() {
-        return waitUntil(value -> button.isElementPresent(), 10);
+        return waitUntil(value -> addToCartButton.isElementPresent(), 10);
     }
 
     public double getProductPrice() {

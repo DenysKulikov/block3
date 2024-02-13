@@ -24,7 +24,7 @@ public class PopupWindow extends AbstractUIObject {
         return new CartPage(getDriver());
     }
 
-    public boolean isButtonToCartPageIsPresent() {
-        return waitUntil(input -> buttonToCartPage.isElementPresent(), 10);
+    public boolean isButtonToCartPresent() {
+        return buttonToCartPage.isElementPresent(5);
     }
 }

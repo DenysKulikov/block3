@@ -17,7 +17,7 @@ public class Header extends AbstractUIObject {
     }
 
     public boolean isSearchInputIsPresent() {
-        return waitUntil(value -> searchInput.isElementPresent(), 10);
+        return searchInput.isElementPresent(5);
     }
 
     public String getSearchInputPlaceholder() {

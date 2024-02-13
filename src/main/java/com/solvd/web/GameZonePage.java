@@ -22,6 +22,6 @@ public class GameZonePage extends AbstractPage {
     }
 
     public boolean isTitleElementIsPresent() {
-        return waitUntil(input -> title.isElementPresent(), 10);
+        return title.isElementPresent(5);
     }
 }

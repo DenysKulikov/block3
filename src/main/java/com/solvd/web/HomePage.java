@@ -83,7 +83,7 @@ public class HomePage extends AbstractPage {
     }
 
     public boolean isGiftPriceRangeEndIsPresent() {
-        return waitUntil(input -> giftPriceRangeEnd.isElementPresent(), 10);
+        return giftPriceRangeEnd.isElementPresent(5);
     }
 
     public void clickGeneratePotentialGiftsButton() {
