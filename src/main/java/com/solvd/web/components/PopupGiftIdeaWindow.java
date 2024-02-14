@@ -24,10 +24,6 @@ public class PopupGiftIdeaWindow extends AbstractUIObject {
     @FindBy(xpath = "//div[@class = 'goods-item-content']")
     private List<PotentialGift> potentialGifts;
 
-    public PopupGiftIdeaWindow(WebDriver driver) {
-        super(driver);
-    }
-
     public PopupGiftIdeaWindow(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -36,7 +32,7 @@ public class PopupGiftIdeaWindow extends AbstractUIObject {
         return Double.parseDouble(giftPriceRangeStart.getAttribute("value"));
     }
 
-    public boolean isGiftPriceRangeStartIsPresent() {
+    public boolean isGiftPriceRangeStartPresent() {
         return giftPriceRangeStart.isElementPresent(5);
     }
 
@@ -44,7 +40,7 @@ public class PopupGiftIdeaWindow extends AbstractUIObject {
         return Double.parseDouble(giftPriceRangeEnd.getAttribute("value"));
     }
 
-    public boolean isGiftPriceRangeEndIsPresent() {
+    public boolean isGiftPriceRangeEndPresent() {
         return giftPriceRangeEnd.isElementPresent(5);
     }
 
@@ -52,7 +48,7 @@ public class PopupGiftIdeaWindow extends AbstractUIObject {
         generatePotentialGiftsButton.click();
     }
 
-    public boolean isPotentialGiftsIsPresent() {
+    public boolean isPotentialGiftsPresent() {
         return waitUntil(value -> !potentialGifts.isEmpty(), 10);
     }
 

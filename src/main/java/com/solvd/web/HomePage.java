@@ -42,7 +42,7 @@ public class HomePage extends AbstractPage {
 
     public PopupGiftIdeaWindow clickGiftIdeasButton() {
         giftIdeasButton.click();
-        return new PopupGiftIdeaWindow(driver);
+        return popupGiftIdeaWindow;
     }
 
     public List<ProductCard> getProductCards() {

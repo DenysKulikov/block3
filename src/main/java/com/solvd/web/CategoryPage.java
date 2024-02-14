@@ -16,7 +16,7 @@ public class CategoryPage extends AbstractPage {
         super(driver);
     }
 
-    public SearchPage clickGamesButton(String categoryName) {
+    public SearchPage clickProductsButton(String categoryName) {
         productsButton.format(categoryName).click();
         return new SearchPage(getDriver());
     }

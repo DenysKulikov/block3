@@ -82,10 +82,10 @@ public class HomePageTest extends AbstractTest {
 
         PopupGiftIdeaWindow popupGiftIdeaWindow = homePage.clickGiftIdeasButton();
 
-        Assert.assertTrue(popupGiftIdeaWindow.isGiftPriceRangeStartIsPresent(),
+        Assert.assertTrue(popupGiftIdeaWindow.isGiftPriceRangeStartPresent(),
                 "Gift price range start is not present");
 
-        Assert.assertTrue(popupGiftIdeaWindow.isGiftPriceRangeEndIsPresent(),
+        Assert.assertTrue(popupGiftIdeaWindow.isGiftPriceRangeEndPresent(),
                 "Gift price range end is not present");
 
         double giftPriceRangeStart = popupGiftIdeaWindow.getGiftPriceRangeStart();
@@ -93,7 +93,7 @@ public class HomePageTest extends AbstractTest {
 
         popupGiftIdeaWindow.clickGeneratePotentialGiftsButton();
 
-        Assert.assertTrue(popupGiftIdeaWindow.isPotentialGiftsIsPresent(),
+        Assert.assertTrue(popupGiftIdeaWindow.isPotentialGiftsPresent(),
                 "Potential gifts is not present");
 
         List<PotentialGift> potentialGifts = popupGiftIdeaWindow.getPotentialGifts();
@@ -128,7 +128,7 @@ public class HomePageTest extends AbstractTest {
         Assert.assertTrue(gameZonePage.isTitleElementIsPresent(),
                 "Title element is not present");
 
-        SearchPage gamesPage = gameZonePage.clickGamesButton("Ігри");
+        SearchPage gamesPage = gameZonePage.clickProductsButton("Ігри");
 
         Assert.assertTrue(gamesPage.areProductsCardsPresent(),
                 "Products cards is not present");
