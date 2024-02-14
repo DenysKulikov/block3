@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class HomePage extends AbstractPage {
-    @FindBy(xpath = "//*[@class = 'ui-library-stickyContainer-1244']")
+    @FindBy(xpath = "//*[contains(@class, 'stickyContainer')]")
     private Header header;
 
     @FindBy(xpath = "//p[text() = '%s']")

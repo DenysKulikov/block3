@@ -9,13 +9,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class ProductCard extends AbstractUIObject {
-    @FindBy(xpath = ".//*[contains(@class, 'GoodsDescriptionstyled__StyledLinkWrapper')]")
+    @FindBy(xpath = ".//a[span[contains(@class, 'GoodsDescription')]]")
     private ExtendedWebElement titleElement;
 
     @FindBy(xpath = ".//button[contains(@class, 'ui-library-buttonPrimary')]")
     private ExtendedWebElement addToCartButton;
 
-    @FindBy(xpath = ".//span[@class = 'ui-library-subtitle1Bold-399e']")
+    @FindBy(xpath = ".//div[contains(@class, 'CurrentPrice')]//span[contains(@class, 'subtitle')]")
     private ExtendedWebElement productPrice;
 
     public ProductCard(WebDriver driver, SearchContext searchContext) {
