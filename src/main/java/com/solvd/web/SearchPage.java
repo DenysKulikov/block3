@@ -26,6 +26,9 @@ public class SearchPage extends AbstractPage {
     @FindBy(css = "a.ui-library-buttonSuccess-aaf1")
     private ExtendedWebElement successAddedButton;
 
+    @FindBy(xpath = "//ul")
+    private ExtendedWebElement paginationElement;
+
     public SearchPage(WebDriver driver) {
         super(driver);
     }
@@ -54,7 +57,11 @@ public class SearchPage extends AbstractPage {
         return title.getText();
     }
 
-    public boolean areProductsCards() {
+    public boolean areProductsCardsPresent() {
         return waitUntil(value -> !productCards.isEmpty(), 10);
+    }
+
+    public boolean isPaginationPresent() {
+        return paginationElement.isElementPresent(5);
     }
 }

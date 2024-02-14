@@ -130,8 +130,8 @@ public class HomePageTest extends AbstractTest {
 
         SearchPage gamesPage = gameZonePage.clickGamesButton("Ігри");
 
-        Assert.assertTrue(gamesPage.areProductsCards(),
-                "Search input is not present()");
+        Assert.assertTrue(gamesPage.areProductsCardsPresent(),
+                "Products cards is not present");
 
         List<ProductCard> productCards = gamesPage.getProductCards();
 

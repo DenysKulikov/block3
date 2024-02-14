@@ -1,6 +1,5 @@
 package com.solvd.web.components.cart;
 
-import com.solvd.web.CartPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
