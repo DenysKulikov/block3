@@ -1,6 +1,7 @@
-package com.solvd;
+package com.solvd.apiTests;
 
-import com.solvd.domain.User;
+import com.solvd.api.*;
+import com.solvd.api.domain.User;
 import com.zebrunner.carina.api.apitools.validation.JsonComparatorContext;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import org.testng.annotations.Test;
@@ -19,8 +20,7 @@ public class UserTest {
         GetUserByIdMethod getUserById = new GetUserByIdMethod(user.getId());
         getUserById.addProperty("user", user);
 
-        getUserById.expectResponseStatus(HttpResponseStatusType.OK_200);
-        getUserById.callAPI();
+        getUserById.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
                 .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
@@ -35,8 +35,7 @@ public class UserTest {
 
         DeleteUserMethod deleteUser = new DeleteUserMethod(user.getId());
 
-        deleteUser.expectResponseStatus(HttpResponseStatusType.OK_200);
-        deleteUser.callAPI();
+        deleteUser.callAPIExpectSuccess();
     }
 
     @Test
@@ -48,8 +47,7 @@ public class UserTest {
         CreateUserMethod createUser = new CreateUserMethod();
         createUser.addProperty("user", user);
 
-        createUser.expectResponseStatus(HttpResponseStatusType.OK_200);
-        createUser.callAPI();
+        createUser.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
                 .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
@@ -67,8 +65,7 @@ public class UserTest {
         UpdateUserPutMethod updateUserPut = new UpdateUserPutMethod(user.getId());
         updateUserPut.addProperty("user", user);
 
-        updateUserPut.expectResponseStatus(HttpResponseStatusType.OK_200);
-        updateUserPut.callAPI();
+        updateUserPut.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
                 .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
@@ -86,8 +83,7 @@ public class UserTest {
         UpdateUserPatchMethod updateUserPatch = new UpdateUserPatchMethod(user.getId());
         updateUserPatch.addProperty("user", user);
 
-        updateUserPatch.expectResponseStatus(HttpResponseStatusType.OK_200);
-        updateUserPatch.callAPI();
+        updateUserPatch.callAPIExpectSuccess();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
                 .<String>withPredicate("phonePredicate", phone -> isPhoneValid(phone));
