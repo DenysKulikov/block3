@@ -7,15 +7,15 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class PopupWindow extends AbstractUIObject {
+public class PopupCartWindow extends AbstractUIObject {
     @FindBy(xpath = ".//*[@class = 'basket-button']")
     private ExtendedWebElement buttonToCartPage;
 
-    public PopupWindow(WebDriver driver, SearchContext searchContext) {
+    public PopupCartWindow(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public PopupWindow(WebDriver driver) {
+    public PopupCartWindow(WebDriver driver) {
         super(driver);
     }
 

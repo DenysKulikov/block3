@@ -1,7 +1,7 @@
 package com.solvd.web.components;
 
 
-import com.solvd.web.components.cart.PopupWindow;
+import com.solvd.web.components.cart.PopupCartWindow;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
@@ -26,13 +26,13 @@ public class ProductCard extends AbstractUIObject {
         return titleElement.getText();
     }
 
-    public PopupWindow addToCartButton() {
+    public PopupCartWindow addToCartButton() {
         addToCartButton.click();
-        return new PopupWindow(getDriver());
+        return new PopupCartWindow(getDriver());
     }
 
     public boolean isAddToCartButtonIsPresent() {
-        return waitUntil(value -> addToCartButton.isElementPresent(), 10);
+        return addToCartButton.isElementPresent(5);
     }
 
     public double getProductPrice() {

@@ -12,6 +12,9 @@ public class Header extends AbstractUIObject {
     @FindBy(xpath = ".//*[@type= 'search']")
     private ExtendedWebElement searchInput;
 
+    @FindBy(xpath = "//a[@data-name = 'cart-icon']//div[contains(@class, 'badg')]")
+    private ExtendedWebElement numberAddedToCartProducts;
+
     public Header(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -31,5 +34,9 @@ public class Header extends AbstractUIObject {
     public SearchPage clickEnter() {
         searchInput.sendKeys(Keys.ENTER);
         return new SearchPage(getDriver());
+    }
+
+    public boolean isNumberAddedToCartProductsNotPresent() {
+        return numberAddedToCartProducts.isElementNotPresent(5);
     }
 }

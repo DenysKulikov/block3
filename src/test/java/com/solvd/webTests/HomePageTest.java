@@ -2,10 +2,11 @@ package com.solvd.webTests;
 
 import com.solvd.web.*;
 import com.solvd.web.components.Header;
+import com.solvd.web.components.PopupGiftIdeaWindow;
 import com.solvd.web.components.PotentialGift;
 import com.solvd.web.components.ProductCard;
 import com.solvd.web.components.cart.CartProduct;
-import com.solvd.web.components.cart.PopupWindow;
+import com.solvd.web.components.cart.PopupCartWindow;
 import com.zebrunner.carina.core.AbstractTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -37,28 +38,34 @@ public class HomePageTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        Assert.assertTrue(homePage.getHeader().isSearchInputIsPresent(),
+        Header header = homePage.getHeader();
+
+        Assert.assertTrue(header.isSearchInputIsPresent(),
                 "Search input is not present");
 
         List<ProductCard> productCards = homePage.getProductCards();
         ProductCard productCard = productCards.get(0);
         productCard.hoverOnTitle();
 
-        Assert.assertTrue(productCard.isAddToCartButtonIsPresent());
+        Assert.assertTrue(productCard.isAddToCartButtonIsPresent(),
+                "Add to cart button is not present");
 
-        PopupWindow popupWindow = productCard.addToCartButton();
+        PopupCartWindow popupWindow = productCard.addToCartButton();
 
-        popupWindow.isButtonToCartPresent();
+        Assert.assertTrue(popupWindow.isButtonToCartPresent(),
+                "Button to cart is not present");
 
         CartPage cartPage = popupWindow.clickButtonToCartPage();
 
-        cartPage.isProductsIsPresent();
+        Assert.assertTrue(cartPage.areProductsPresent(),
+                "Products are not present");
 
         List<CartProduct> cartProducts = cartPage.getProducts();
         CartProduct cartProduct = cartProducts.get(0);
         cartProduct.clickButtonDeleteProduct();
 
-        Assert.assertTrue(homePage.isNumberAddedToCartProductsNotPresent());
+        Assert.assertTrue(header.isNumberAddedToCartProductsNotPresent(),
+                "Number added to cart products are not present");
     }
 
     @Test
@@ -68,26 +75,28 @@ public class HomePageTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        Assert.assertTrue(homePage.getHeader().isSearchInputIsPresent(),
+        Header header = homePage.getHeader();
+
+        Assert.assertTrue(header.isSearchInputIsPresent(),
                 "Search input is not present");
 
-        homePage.clickGiftIdeasButton();
+        PopupGiftIdeaWindow popupGiftIdeaWindow = homePage.clickGiftIdeasButton();
 
-        boolean isGiftPriceRangeStartPresent = homePage.isGiftPriceRangeStartIsPresent();
+        Assert.assertTrue(popupGiftIdeaWindow.isGiftPriceRangeStartIsPresent(),
+                "Gift price range start is not present");
 
-        Assert.assertTrue(isGiftPriceRangeStartPresent, "Gift price range start is not present");
+        Assert.assertTrue(popupGiftIdeaWindow.isGiftPriceRangeEndIsPresent(),
+                "Gift price range end is not present");
 
-        boolean isGiftPriceRangeEndPresent = homePage.isGiftPriceRangeEndIsPresent();
-        Assert.assertTrue(isGiftPriceRangeEndPresent, "Gift price range end is not present");
+        double giftPriceRangeStart = popupGiftIdeaWindow.getGiftPriceRangeStart();
+        double giftPriceRangeEnd = popupGiftIdeaWindow.getGiftPriceRangeEnd();
 
-        double giftPriceRangeStart = homePage.getGiftPriceRangeStart();
-        double giftPriceRangeEnd = homePage.getGiftPriceRangeEnd();
+        popupGiftIdeaWindow.clickGeneratePotentialGiftsButton();
 
-        homePage.clickGeneratePotentialGiftsButton();
+        Assert.assertTrue(popupGiftIdeaWindow.isPotentialGiftsIsPresent(),
+                "Potential gifts is not present");
 
-        homePage.isPotentialGiftsIsPresent();
-
-        List<PotentialGift> potentialGifts = homePage.getPotentialGifts();
+        List<PotentialGift> potentialGifts = popupGiftIdeaWindow.getPotentialGifts();
 
         for (PotentialGift potentialGift : potentialGifts) {
             double potentialGiftPrice = potentialGift.getPotentialGiftPrice();
@@ -105,22 +114,24 @@ public class HomePageTest extends AbstractTest {
 
         Header header = homePage.getHeader();
 
-        Assert.assertTrue(homePage.getHeader().isSearchInputIsPresent(),
+        Assert.assertTrue(header.isSearchInputIsPresent(),
                 "Search input is not present");
 
         Assert.assertEquals(header.getSearchInputPlaceholder(), "Пошук товарів",
                 "Search input has an incorrect placeholder");
 
-        Assert.assertTrue(homePage.isGameZoneButtonPresent(),
+        Assert.assertTrue(homePage.isCategoryButtonPresent("Ігрова зона"),
                 "Game zone button is not present");
 
-        GameZonePage gameZonePage = homePage.clickGameZoneButton();
+        CategoryPage gameZonePage = homePage.clickCategoryButton("Ігрова зона");
 
-        gameZonePage.isTitleElementIsPresent();
+        Assert.assertTrue(gameZonePage.isTitleElementIsPresent(),
+                "Title element is not present");
 
-        GamesPage gamesPage = gameZonePage.clickGamesButton();
+        SearchPage gamesPage = gameZonePage.clickGamesButton("Ігри");
 
-        gamesPage.isTitleElementIsPresent();
+        Assert.assertTrue(gamesPage.areProductsCards(),
+                "Search input is not present()");
 
         List<ProductCard> productCards = gamesPage.getProductCards();
 
@@ -146,7 +157,8 @@ public class HomePageTest extends AbstractTest {
 
         SearchPage searchPage = header.clickEnter();
 
-        searchPage.isTitleElementIsPresent();
+        Assert.assertTrue(searchPage.isTitleElementIsPresent(),
+                "Title element is not present");
 
         List<ProductCard> productCards = searchPage.getProductCards();
         ProductCard firstProductCard = productCards.get(0);
@@ -154,14 +166,17 @@ public class HomePageTest extends AbstractTest {
         String expectedProductTitle = firstProductCard.getTitleText();
         double expectedProductPrice = firstProductCard.getProductPrice();
 
-        Assert.assertTrue(firstProductCard.isAddToCartButtonIsPresent(), "Add to cart button is not present");
-        PopupWindow popupWindow = firstProductCard.addToCartButton();
-        searchPage.isSuccessAddedButtonIsPresent();
+        Assert.assertTrue(firstProductCard.isAddToCartButtonIsPresent(),
+                "Add to cart button is not present");
+        PopupCartWindow popupWindow = firstProductCard.addToCartButton();
+        Assert.assertTrue(searchPage.isSuccessAddedButtonIsPresent(),
+                "Success added button is not present");
 
-        popupWindow.isButtonToCartPresent();
+        Assert.assertTrue(popupWindow.isButtonToCartPresent(),
+                "Button to cart is not present");
 
         CartPage cartPage = popupWindow.clickButtonToCartPage();
-        cartPage.isProductsIsPresent();
+        cartPage.areProductsPresent();
 
         List<CartProduct> cartProducts = cartPage.getProducts();
         double productsTotalPriceInCart = cartProducts.stream()
@@ -194,7 +209,7 @@ public class HomePageTest extends AbstractTest {
 
         SearchPage searchPage = header.clickEnter();
 
-        Assert.assertTrue(searchPage.isTitleElementIsPresent());
+        Assert.assertTrue(searchPage.isTitleElementIsPresent(), "Title is not present");
 
         List<ProductCard> productCards = searchPage.getProductCards();
 

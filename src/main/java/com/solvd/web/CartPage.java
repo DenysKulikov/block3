@@ -5,7 +5,6 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class CartPage extends AbstractPage {
         return products;
     }
 
-    public boolean isProductsIsPresent() {
+    public boolean areProductsPresent() {
         return waitUntil(value -> !products.isEmpty(), 10);
     }
 }
