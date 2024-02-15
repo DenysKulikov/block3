@@ -16,6 +16,13 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
         };
     }
 
+    @DataProvider
+    public Object[][] categories() {
+        return new Object[][] {
+                {"Home"}
+        };
+    }
+
     @BeforeTest
     public void startToDoApp() {
         startApp("todolist.scheduleplanner.dailyplanner.todo.reminders");
@@ -31,15 +38,15 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
         homePage.deleteTask(task);
     }
 
-    @Test
-    public void verifyAddNewCategory() {
+    @Test(dataProvider = "categories")
+    public void verifyAddNewCategory(String category) {
         HomePage homePage = new HomePage(getDriver());
 
-        homePage.addNewCategory("Home");
-        Assert.assertTrue(homePage.isCategoryPresent("Home"));
-        homePage.deleteCategory("Home");
+        homePage.addNewCategory(category);
+        Assert.assertTrue(homePage.isCategoryPresent(category));
+        homePage.deleteCategory(category);
 
-        Assert.assertFalse(homePage.isCategoryPresent("Home"));
+        Assert.assertFalse(homePage.isCategoryPresent(category));
         homePage.clickBackToHomePageButton();
     }
 }
