@@ -1,12 +1,13 @@
 package com.solvd.android;
 
+import com.solvd.android.components.Category;
+import com.solvd.android.components.Task;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,17 +21,8 @@ public class HomePage extends AbstractPage implements IMobileUtils {
     @FindBy(xpath = "//*[contains(@resource-id, 'id/task_create_btn')]")
     private ExtendedWebElement submitButton;
 
-    @FindBy(xpath = "//*[contains(@text, '%s')]")
-    private ExtendedWebElement task;
-
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/task_detail_more')]")
-    private ExtendedWebElement taskDetailsButton;
-
-    @FindBy(xpath = "//*[contains(@resource-id, 'd/detail_delete')]")
-    private ExtendedWebElement taskDetailsDeleteButton;
-
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/dialog_confirm')]")
-    private ExtendedWebElement confirmDeleteTaskButton;
+    @FindBy(xpath = "//*[contains(@resource-id, 'id/task_slideLinearLayout')]")
+    private List<Task> tasks;
 
     @FindBy(xpath = "//*[contains(@resource-id, 'id/tag_management')]")
     private ExtendedWebElement detailsButton;
@@ -38,28 +30,18 @@ public class HomePage extends AbstractPage implements IMobileUtils {
     @FindBy(xpath = "//*[contains(@resource-id, 'id/popup_tv') and @text=\"Manage Categories\"]")
     private ExtendedWebElement manageCategoriesButton;
 
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/create_category_text')]")
-    private ExtendedWebElement createNewCategoryButton;
+    @FindBy(xpath = "//*[contains(@resource-id, '%s')]")
+    private ExtendedWebElement bottomPanelButton;
 
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/dialog_input')]")
-    private ExtendedWebElement input;
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/dialog_confirm')]")
-    private ExtendedWebElement saveCategoryButton;
-
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/toolbar_back')]")
-    private ExtendedWebElement backToHomePageButton;
-
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/category_text') and @text=\"Wishlist\"]")
-    private ExtendedWebElement wishListCategory;
-
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/categorymag_layout')]/android.view.ViewGroup")
-    private List<Category> categories;
+    @FindBy(xpath = "//*[contains(@resource-id, 'id/label_text')]")
+    private ExtendedWebElement completedTodayLabel;
 
     @FindBy(xpath = "//*[contains(@resource-id, 'id/dialog_confirm')]")
-    private ExtendedWebElement confirmDeleteCategory;
+    private ExtendedWebElement deleteSubmitButton;
 
-    @FindBy(xpath = ".//*[@text=\"Delete\"]")
-    private ExtendedWebElement deleteCategoryButton;
+    @FindBy(xpath = "(//*[contains(@resource-id, 'id/symbol_icon4')])[1]")
+    private ExtendedWebElement greenFlagButton;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -71,11 +53,20 @@ public class HomePage extends AbstractPage implements IMobileUtils {
         sendKeysToInputTextBar(taskText);
     }
 
-    public void deleteTask(String taskText) {
-        task.format(taskText).click();
-        clickTaskDetailsButton();
-        clickTaskDetailsDeleteButton();
-        clickConfirmDeleteTaskButton();
+    public void deleteTask(String taskName) {
+        findTaskByName(taskName).get().taskClick();
+        TaskDetailsPage taskDetailsPage = new TaskDetailsPage(getDriver());
+
+        taskDetailsPage.clickTaskDetailsButton();
+        taskDetailsPage.clickTaskDetailsDeleteButton();
+        taskDetailsPage.clickConfirmDeleteTaskButton();
+    }
+
+    public Optional<Task> findTaskByName(String taskName) {
+        isTasksPresent();
+        return getTasks().stream().
+                filter(task -> task.getTaskTex().equals(taskName))
+                .findFirst();
     }
 
     private void sendKeysToInputTextBar(String text) {
@@ -83,70 +74,104 @@ public class HomePage extends AbstractPage implements IMobileUtils {
         clickOnSubmitButton();
     }
 
+    private boolean isTasksPresent() {
+        return waitUntil(value -> !tasks.isEmpty(), 3);
+    }
+
     private void clickOnSubmitButton() {
         submitButton.click();
-    }
-
-    public String isTaskExists(String taskText) {
-        return task.format(taskText).getText();
-    }
-
-    private void clickTaskDetailsButton() {
-        taskDetailsButton.click();
-    }
-
-    private void clickTaskDetailsDeleteButton() {
-        taskDetailsDeleteButton.click();
-    }
-
-    private void clickConfirmDeleteTaskButton() {
-        confirmDeleteTaskButton.click();
-    }
-
-    private void clickDetailsButton() {
-        detailsButton.click();
     }
 
     private void clickManageCategoriesButton() {
         manageCategoriesButton.click();
     }
 
-    private void clickCreateNewCategoryButton() {
-        createNewCategoryButton.click();
-    }
-
-    private void clickSaveCategoryButton() {
-        saveCategoryButton.click();
-    }
-
-    public void clickBackToHomePageButton() {
-        backToHomePageButton.click();
-    }
-
     public boolean isCategoryPresent(String categoryName) {
-        return categories.stream()
-                .anyMatch(category -> category.getCategoryText().equals(categoryName));
+        ManageCategoriesPage manageCategoriesPage = new ManageCategoriesPage(getDriver());
+
+        return manageCategoriesPage.getCategories().stream()
+                .anyMatch(category -> category.getCategoryName().equals(categoryName));
     }
 
     public void addNewCategory(String category) {
+        ManageCategoriesPage manageCategoriesPage = new ManageCategoriesPage(getDriver());
+
         clickDetailsButton();
         clickManageCategoriesButton();
-        clickCreateNewCategoryButton();
-        input.type(category);
-        clickSaveCategoryButton();
-    }
-
-    private void deleteCategory(Category category) {
-        category.clickCategoryProperties();
-        deleteCategoryButton.click();
-        confirmDeleteCategory.click();
+        manageCategoriesPage.clickCreateNewCategoryButton();
+        manageCategoriesPage.typeToInputBar(category);
+        manageCategoriesPage.clickSaveCategoryButton();
     }
 
     public void deleteCategory(String categoryName) {
+        ManageCategoriesPage manageCategoriesPage = new ManageCategoriesPage(getDriver());
+        List<Category> categories = manageCategoriesPage.getCategories();
+
         Optional<Category> categoryToDelete = categories.stream()
-                .filter(category -> category.getCategoryText().toLowerCase().equals(categoryName.toLowerCase()))
+                .filter(category -> category.getCategoryName().toLowerCase().equals(categoryName.toLowerCase()))
                 .findFirst();
 
-        deleteCategory(categoryToDelete.get());
+        manageCategoriesPage.deleteCategory(categoryToDelete.get());
+    }
+
+    public void clickDetailsButton() {
+        detailsButton.click();
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public boolean isTaskPresent(String taskName) {
+        isTasksPresent();
+        return getTasks().stream()
+                .anyMatch(task -> task.getTaskTex().equals(taskName));
+    }
+
+    public void makeTaskComplete(String taskName) {
+        Optional<Task> task = findTaskByName(taskName);
+        task.get().clickMakeTaskCompleteButton();
+    }
+
+    public void clickBottomPanelButton(String bottomPanelButtonId) {
+        bottomPanelButton.format(bottomPanelButtonId).click();
+    }
+
+    public boolean isCompletedTodayLabelIsPresent() {
+        return completedTodayLabel.isElementPresent();
+    }
+
+    public void swipeLeftToDeleteTask(String taskName) {
+        Optional<Task> task = findTaskByName(taskName);
+
+        if (task.isPresent()) {
+            Task taskElement = task.get();
+
+            taskElement.swipeLeftFlag();
+            taskElement.clickDeleteButton();
+            clickDeleteSubmitButton();
+        } else {
+            // Handle the case when the task is not found
+            System.out.println("Task not found: " + taskName);
+        }
+    }
+
+    public void clickDeleteSubmitButton() {
+        isDeleteSubmitButtonIsPresent();
+        deleteSubmitButton.click();
+    }
+
+    public boolean isDeleteSubmitButtonIsPresent() {
+        return deleteSubmitButton.isPresent();
+    }
+
+    public void clickGreenFlagButton() {
+        greenFlagButton.click();
+    }
+
+    public void pendTask(String taskName) {
+        Optional<Task> task = findTaskByName(taskName);
+        task.get().clickFlag();
+        clickGreenFlagButton();
     }
 }

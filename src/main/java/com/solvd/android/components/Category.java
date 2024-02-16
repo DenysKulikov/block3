@@ -1,4 +1,4 @@
-package com.solvd.android;
+package com.solvd.android.components;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -11,17 +11,17 @@ public class Category extends AbstractUIObject {
     private ExtendedWebElement categoryTitle;
 
     @FindBy(xpath = ".//android.widget.ImageView[contains(@resource-id, 'id/more')]")
-    private ExtendedWebElement categoryProperties;
+    private ExtendedWebElement categoryPropertiesButton;
 
     public Category(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public String getCategoryText() {
+    public String getCategoryName() {
         return categoryTitle.getText();
     }
 
-    public void clickCategoryProperties() {
-        categoryProperties.click();
+    public void clickCategoryPropertiesButton() {
+        categoryPropertiesButton.click();
     }
 }
