@@ -47,131 +47,49 @@ public class HomePage extends AbstractPage implements IMobileUtils {
         super(driver);
     }
 
-    public void addNewTask(String taskText) {
+    public void typeToInputTextBar(String string) {
+        inputTextBar.type(string);
+    }
+
+    public void clickAddTaskButton() {
         addTaskButton.click();
-
-        sendKeysToInputTextBar(taskText);
     }
 
-    public void deleteTask(String taskName) {
-        findTaskByName(taskName).get().taskClick();
-        TaskDetailsPage taskDetailsPage = new TaskDetailsPage(getDriver());
-
-        taskDetailsPage.clickTaskDetailsButton();
-        taskDetailsPage.clickTaskDetailsDeleteButton();
-        taskDetailsPage.clickConfirmDeleteTaskButton();
-    }
-
-    public Optional<Task> findTaskByName(String taskName) {
-        isTasksPresent();
-        return getTasks().stream().
-                filter(task -> task.getTaskTex().equals(taskName))
-                .findFirst();
-    }
-
-    private void sendKeysToInputTextBar(String text) {
-        inputTextBar.type(text);
-        clickOnSubmitButton();
-    }
-
-    private boolean isTasksPresent() {
-        return waitUntil(value -> !tasks.isEmpty(), 3);
-    }
-
-    private void clickOnSubmitButton() {
+    public Task clickOnSubmitButton() {
         submitButton.click();
+        return new Task(getDriver());
     }
 
-    private void clickManageCategoriesButton() {
+    public ManageCategoriesPage clickManageCategoriesButton() {
         manageCategoriesButton.click();
-    }
-
-    public boolean isCategoryPresent(String categoryName) {
-        ManageCategoriesPage manageCategoriesPage = new ManageCategoriesPage(getDriver());
-
-        return manageCategoriesPage.getCategories().stream()
-                .anyMatch(category -> category.getCategoryName().equals(categoryName));
-    }
-
-    public void addNewCategory(String category) {
-        ManageCategoriesPage manageCategoriesPage = new ManageCategoriesPage(getDriver());
-
-        clickDetailsButton();
-        clickManageCategoriesButton();
-        manageCategoriesPage.clickCreateNewCategoryButton();
-        manageCategoriesPage.typeToInputBar(category);
-        manageCategoriesPage.clickSaveCategoryButton();
-    }
-
-    public void deleteCategory(String categoryName) {
-        ManageCategoriesPage manageCategoriesPage = new ManageCategoriesPage(getDriver());
-        List<Category> categories = manageCategoriesPage.getCategories();
-
-        Optional<Category> categoryToDelete = categories.stream()
-                .filter(category -> category.getCategoryName().toLowerCase().equals(categoryName.toLowerCase()))
-                .findFirst();
-
-        manageCategoriesPage.deleteCategory(categoryToDelete.get());
+        return new ManageCategoriesPage(getDriver());
     }
 
     public void clickDetailsButton() {
         detailsButton.click();
     }
 
+    public boolean isDetailsButtonPresent() {
+        return detailsButton.isElementPresent();
+    }
+
     public List<Task> getTasks() {
         return tasks;
-    }
-
-    public boolean isTaskPresent(String taskName) {
-        isTasksPresent();
-        return getTasks().stream()
-                .anyMatch(task -> task.getTaskTex().equals(taskName));
-    }
-
-    public void makeTaskComplete(String taskName) {
-        Optional<Task> task = findTaskByName(taskName);
-        task.get().clickMakeTaskCompleteButton();
     }
 
     public void clickBottomPanelButton(String bottomPanelButtonId) {
         bottomPanelButton.format(bottomPanelButtonId).click();
     }
 
-    public boolean isCompletedTodayLabelIsPresent() {
+    public boolean isCompletedTodayLabelPresent() {
         return completedTodayLabel.isElementPresent();
     }
 
-    public void swipeLeftToDeleteTask(String taskName) {
-        Optional<Task> task = findTaskByName(taskName);
-
-        if (task.isPresent()) {
-            Task taskElement = task.get();
-
-            taskElement.swipeLeftFlag();
-            taskElement.clickDeleteButton();
-            clickDeleteSubmitButton();
-        } else {
-            // Handle the case when the task is not found
-            System.out.println("Task not found: " + taskName);
-        }
-    }
-
     public void clickDeleteSubmitButton() {
-        isDeleteSubmitButtonIsPresent();
         deleteSubmitButton.click();
-    }
-
-    public boolean isDeleteSubmitButtonIsPresent() {
-        return deleteSubmitButton.isPresent();
     }
 
     public void clickGreenFlagButton() {
         greenFlagButton.click();
-    }
-
-    public void pendTask(String taskName) {
-        Optional<Task> task = findTaskByName(taskName);
-        task.get().clickFlag();
-        clickGreenFlagButton();
     }
 }

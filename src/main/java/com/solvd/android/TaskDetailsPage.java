@@ -30,4 +30,10 @@ public class TaskDetailsPage extends AbstractPage {
     public void clickTaskDetailsButton() {
         taskDetailsButton.click();
     }
+
+    public void deleteTask() {
+        clickTaskDetailsButton();
+        clickTaskDetailsDeleteButton();
+        clickConfirmDeleteTaskButton();
+    }
 }

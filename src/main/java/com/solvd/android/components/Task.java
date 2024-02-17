@@ -1,5 +1,6 @@
 package com.solvd.android.components;
 
+import com.solvd.android.TaskDetailsPage;
 import com.zebrunner.carina.utils.android.IAndroidUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -8,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class Task extends AbstractUIObject implements IAndroidUtils {
-    @FindBy(xpath = ".//android.widget.TextView[contains(@resource-id, 'id/task_text')]")
+    @FindBy(xpath = ".//*[@text ='%s']")
     private ExtendedWebElement taskName;
 
     @FindBy(xpath = "//android.view.View[contains(@resource-id, 'id/task_check')]")
@@ -20,29 +21,39 @@ public class Task extends AbstractUIObject implements IAndroidUtils {
     @FindBy(xpath = "//*[contains(@resource-id, 'id/task_delete_layout')]")
     private ExtendedWebElement deleteButton;
 
+    public Task(WebDriver driver) {
+        super(driver);
+    }
+
     public Task(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public void taskClick() {
-        taskName.click();
+    public TaskDetailsPage taskClick(String task) {
+        taskName.format(task).click();
+        return new TaskDetailsPage(getDriver());
     }
 
-    public String getTaskTex() {
-        return taskName.getText();
+    public String getTaskName(String task) {
+        return taskName.format(task).getText();
     }
 
     public void clickMakeTaskCompleteButton() {
         makeTaskCompleteButton.click();
     }
 
-    public void swipeLeftFlag() {
+    public void swipeLeftFlag(String task) {
         int startX = flag.getLocation().getX();
         int startY = flag.getLocation().getY();
-        int endY = taskName.getLocation().getY();
-        int endX = taskName.getLocation().getX();
+        int endY = taskName.format(task).getLocation().getY();
+        int endX = taskName.format(task).getLocation().getX();
 
         swipe(startX, startY, endX, endY, 1000);
+    }
+
+    public void swipeLeftToClickDeleteButton(String taskName) {
+        swipeLeftFlag(taskName);
+        clickDeleteButton();
     }
 
     public void clickDeleteButton() {
@@ -51,5 +62,9 @@ public class Task extends AbstractUIObject implements IAndroidUtils {
 
     public void clickFlag() {
         flag.click();
+    }
+
+    public boolean isTaskPresent(String task) {
+        return taskName.format(task).isElementPresent();
     }
 }

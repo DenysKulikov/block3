@@ -27,7 +27,7 @@ public class ManageCategoriesPage extends AbstractPage {
     @FindBy(xpath = "//*[contains(@resource-id, 'id/dialog_confirm')]")
     private ExtendedWebElement confirmDeleteCategory;
 
-    @FindBy(xpath = ".//*[@text=\"Delete\"]")
+    @FindBy(xpath = ".//*[@text='Delete']")
     private ExtendedWebElement deleteCategoryButton;
 
     public ManageCategoriesPage(WebDriver driver) {
@@ -38,8 +38,9 @@ public class ManageCategoriesPage extends AbstractPage {
         createNewCategoryButton.click();
     }
 
-    public void clickSaveCategoryButton() {
+    public Category clickSaveCategoryButton() {
         saveCategoryButton.click();
+        return new Category(getDriver());
     }
 
     public void clickBackToHomePageButton() {
