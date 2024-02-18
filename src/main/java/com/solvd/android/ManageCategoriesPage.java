@@ -53,6 +53,14 @@ public class ManageCategoriesPage extends AbstractPage {
         confirmDeleteCategory.click();
     }
 
+    public void waitUntilCategoriesPresent() {
+        waitUntil((value) -> !categories.isEmpty(), 3);
+    }
+
+    public boolean isInputLineIsPresent() {
+        return input.isPresent();
+    }
+
     public List<Category> getCategories() {
         return categories;
     }

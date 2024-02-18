@@ -34,10 +34,6 @@ public class Task extends AbstractUIObject implements IAndroidUtils {
         return new TaskDetailsPage(getDriver());
     }
 
-    public String getTaskName(String task) {
-        return taskName.format(task).getText();
-    }
-
     public void clickMakeTaskCompleteButton() {
         makeTaskCompleteButton.click();
     }
@@ -51,6 +47,10 @@ public class Task extends AbstractUIObject implements IAndroidUtils {
         swipe(startX, startY, endX, endY, 1000);
     }
 
+    public String getTaskText(String task) {
+        return taskName.format(task).getText();
+    }
+
     public void swipeLeftToClickDeleteButton(String taskName) {
         swipeLeftFlag(taskName);
         clickDeleteButton();
@@ -62,9 +62,5 @@ public class Task extends AbstractUIObject implements IAndroidUtils {
 
     public void clickFlag() {
         flag.click();
-    }
-
-    public boolean isTaskPresent(String task) {
-        return taskName.format(task).isElementPresent();
     }
 }

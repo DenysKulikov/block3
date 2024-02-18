@@ -8,6 +8,7 @@ import com.solvd.web.components.ProductCard;
 import com.solvd.web.components.cart.CartProduct;
 import com.solvd.web.components.cart.PopupCartWindow;
 import com.zebrunner.carina.core.AbstractTest;
+import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -17,6 +18,9 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 
 public class HomePageTest extends AbstractTest {
+    private static final String USER_PHONE = R.TESTDATA.get("user_phone");
+    private static final String USER_PASSWORD = R.TESTDATA.get("user_password");
+
     @DataProvider
     public Object[][] brandNames() {
         return new Object[][] {

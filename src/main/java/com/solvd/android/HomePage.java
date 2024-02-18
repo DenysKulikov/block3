@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.Optional;
 
 public class HomePage extends AbstractPage implements IMobileUtils {
     @FindBy(xpath = "//*[contains(@resource-id, 'id/iv_task_add')]")
@@ -55,14 +54,31 @@ public class HomePage extends AbstractPage implements IMobileUtils {
         addTaskButton.click();
     }
 
-    public Task clickOnSubmitButton() {
+    public boolean isAddTaskButtonPresent() {
+        return addTaskButton.isElementPresent();
+    }
+
+    public boolean isTaskPresent(String taskName) {
+        waitUntilTasksPresent();
+        return tasks.stream()
+                .anyMatch(task -> task.getTaskText(taskName).equalsIgnoreCase(taskName));
+    }
+
+    public void waitUntilTasksPresent() {
+        waitUntil((value) -> !tasks.isEmpty(), 3);
+    }
+
+    public void clickOnSubmitButton() {
         submitButton.click();
-        return new Task(getDriver());
     }
 
     public ManageCategoriesPage clickManageCategoriesButton() {
         manageCategoriesButton.click();
         return new ManageCategoriesPage(getDriver());
+    }
+
+    public boolean isManageCategoriesButtonPresent() {
+        return manageCategoriesButton.isElementPresent();
     }
 
     public void clickDetailsButton() {
@@ -91,5 +107,9 @@ public class HomePage extends AbstractPage implements IMobileUtils {
 
     public void clickGreenFlagButton() {
         greenFlagButton.click();
+    }
+
+    public boolean isInputTextBarPresent() {
+        return inputTextBar.isElementPresent();
     }
 }
