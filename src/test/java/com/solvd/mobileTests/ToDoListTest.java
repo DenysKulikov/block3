@@ -47,13 +47,14 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
                 "The input text bar is not appeared");
 
         homePage.typeToInputTextBar(taskName);
-        homePage.clickOnSubmitButton();
-        Task task = new Task(getDriver());
+        Assert.assertEquals(homePage.getInputTextBarText(), taskName,
+                "Text does not entered");
 
+        homePage.clickOnSubmitButton();
         Assert.assertTrue(homePage.isTaskPresent(taskName),
                 "Task with expected name doesn't present");
 
-        TaskDetailsPage taskDetailsPage = task.taskClick(taskName);
+        TaskDetailsPage taskDetailsPage = homePage.taskClick(taskName);
         taskDetailsPage.deleteTask();
         Assert.assertFalse(homePage.isTaskPresent(taskName),
                 "The task was not deleted");
@@ -104,9 +105,18 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
                 "App is not on the home page");
 
         homePage.clickAddTaskButton();
+        Assert.assertTrue(homePage.isInputTextBarPresent(),
+                "The input text bar is not appeared");
+
         homePage.typeToInputTextBar(taskName);
+        Assert.assertEquals(homePage.getInputTextBarText(), taskName,
+                "Text does not entered");
+
         homePage.clickOnSubmitButton();
-        Task task = new Task(getDriver());
+        Assert.assertTrue(homePage.isTaskPresent(taskName),
+                "Task with expected name doesn't present");
+
+        Task task = homePage.getTaskByName(taskName);
 
         Assert.assertTrue(homePage.isTaskPresent(taskName),
                 "Task is not present");
@@ -114,7 +124,7 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
 
         Assert.assertTrue(homePage.isCompletedTodayLabelPresent(),
                 "Completed Today Label is not Present");
-        task.swipeLeftToClickDeleteButton(taskName);
+        task.swipeLeftToClickDeleteButton();
         homePage.clickDeleteSubmitButton();
         Assert.assertFalse(homePage.isTaskPresent(taskName),
                 "The task was not deleted");
@@ -129,15 +139,22 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
         MinePage minePage = new MinePage(getDriver());
 
         homePage.clickAddTaskButton();
-        homePage.typeToInputTextBar(taskName);
-        homePage.clickOnSubmitButton();
-        Task task = new Task(getDriver());
+        Assert.assertTrue(homePage.isInputTextBarPresent(),
+                "The input text bar is not appeared");
 
+        homePage.typeToInputTextBar(taskName);
+        Assert.assertEquals(homePage.getInputTextBarText(), taskName,
+                "Text does not entered");
+
+        homePage.clickOnSubmitButton();
         Assert.assertTrue(homePage.isTaskPresent(taskName),
                 "Task is not present");
+
         homePage.clickBottomPanelButton(BottomPanelButton.MINE.getButtonId());
         int completedTasksBeforeOperations = minePage.getCompletedTasks();
         homePage.clickBottomPanelButton(BottomPanelButton.TUSKS.getButtonId());
+
+        Task task = homePage.getTaskByName(taskName);
 
         task.clickMakeTaskCompleteButton();
 
@@ -147,7 +164,7 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
                 "Completed Tasks After Operations is not bigger than completed Tasks Before Operations");
 
         homePage.clickBottomPanelButton(BottomPanelButton.TUSKS.getButtonId());
-        TaskDetailsPage taskDetailsPage = task.taskClick(taskName);
+        TaskDetailsPage taskDetailsPage = homePage.taskClick(taskName);
         taskDetailsPage.deleteTask();
         Assert.assertFalse(homePage.isTaskPresent(taskName),
                 "The task was not deleted");
@@ -166,9 +183,18 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
         homePage.clickBottomPanelButton(BottomPanelButton.TUSKS.getButtonId());
 
         homePage.clickAddTaskButton();
+        Assert.assertTrue(homePage.isInputTextBarPresent(),
+                "The input text bar is not appeared");
+
         homePage.typeToInputTextBar(taskName);
+        Assert.assertEquals(homePage.getInputTextBarText(), taskName,
+                "Text does not entered");
+
         homePage.clickOnSubmitButton();
-        Task task = new Task(getDriver());
+        Assert.assertTrue(homePage.isTaskPresent(taskName),
+                "Task is not present");
+
+        Task task = homePage.getTaskByName(taskName);
 
         task.clickFlag();
         homePage.clickGreenFlagButton();
@@ -179,7 +205,7 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
                 "Pending Tasks Before operations is bigger than pending tasks after operations");
 
         homePage.clickBottomPanelButton(BottomPanelButton.TUSKS.getButtonId());
-        TaskDetailsPage taskDetailsPage = task.taskClick(taskName);
+        TaskDetailsPage taskDetailsPage = homePage.taskClick(taskName);
         taskDetailsPage.deleteTask();
         Assert.assertFalse(homePage.isTaskPresent(taskName),
                 "The task was not deleted");

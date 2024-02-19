@@ -58,18 +58,36 @@ public class HomePage extends AbstractPage implements IMobileUtils {
         return addTaskButton.isElementPresent();
     }
 
+    public String getInputTextBarText() {
+        return inputTextBar.getText();
+    }
+
+    public Task getTaskByName(String taskName) {
+        return getTasks().stream()
+                .filter(task -> task.getTaskText().equalsIgnoreCase(taskName))
+                .findFirst().orElse(null);
+    }
+
     public boolean isTaskPresent(String taskName) {
         waitUntilTasksPresent();
         return tasks.stream()
-                .anyMatch(task -> task.getTaskText(taskName).equalsIgnoreCase(taskName));
+                .anyMatch(task -> task.getTaskText().equalsIgnoreCase(taskName));
+    }
+
+    public TaskDetailsPage taskClick(String taskName) {
+        Task taskToClick = tasks.stream()
+                .filter(task -> task.getTaskText().equalsIgnoreCase(taskName))
+                .findFirst().orElse(null);
+        return taskToClick.clickTaskText();
     }
 
     public void waitUntilTasksPresent() {
         waitUntil((value) -> !tasks.isEmpty(), 3);
     }
 
-    public void clickOnSubmitButton() {
+    public Task clickOnSubmitButton() {
         submitButton.click();
+        return new Task(getDriver());
     }
 
     public ManageCategoriesPage clickManageCategoriesButton() {

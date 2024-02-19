@@ -9,16 +9,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class Task extends AbstractUIObject implements IAndroidUtils {
-    @FindBy(xpath = ".//*[@text ='%s']")
+    @FindBy(xpath = ".//android.widget.TextView[contains(@resource-id, 'id/task_text')]")
     private ExtendedWebElement taskName;
 
-    @FindBy(xpath = "//android.view.View[contains(@resource-id, 'id/task_check')]")
+    @FindBy(xpath = ".//android.view.View[contains(@resource-id, 'id/task_check')]")
     private ExtendedWebElement makeTaskCompleteButton;
 
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/task_symbol')]")
+    @FindBy(xpath = ".//*[contains(@resource-id, 'id/task_symbol')]")
     private ExtendedWebElement flag;
 
-    @FindBy(xpath = "//*[contains(@resource-id, 'id/task_delete_layout')]")
+    @FindBy(xpath = ".//*[contains(@resource-id, 'id/task_delete_layout')]")
     private ExtendedWebElement deleteButton;
 
     public Task(WebDriver driver) {
@@ -29,30 +29,30 @@ public class Task extends AbstractUIObject implements IAndroidUtils {
         super(driver, searchContext);
     }
 
-    public TaskDetailsPage taskClick(String task) {
-        taskName.format(task).click();
-        return new TaskDetailsPage(getDriver());
-    }
-
     public void clickMakeTaskCompleteButton() {
         makeTaskCompleteButton.click();
     }
 
-    public void swipeLeftFlag(String task) {
+    public void swipeLeftFlag() {
         int startX = flag.getLocation().getX();
         int startY = flag.getLocation().getY();
-        int endY = taskName.format(task).getLocation().getY();
-        int endX = taskName.format(task).getLocation().getX();
+        int endY = taskName.getLocation().getY();
+        int endX = taskName.getLocation().getX();
 
         swipe(startX, startY, endX, endY, 1000);
     }
 
-    public String getTaskText(String task) {
-        return taskName.format(task).getText();
+    public String getTaskText() {
+        return taskName.getText();
     }
 
-    public void swipeLeftToClickDeleteButton(String taskName) {
-        swipeLeftFlag(taskName);
+    public TaskDetailsPage clickTaskText() {
+        taskName.click();
+        return new TaskDetailsPage(getDriver());
+    }
+
+    public void swipeLeftToClickDeleteButton() {
+        swipeLeftFlag();
         clickDeleteButton();
     }
 
