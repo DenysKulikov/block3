@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="User Suite" verbose="1" parallel="tests" thread-count="3">
+    <test name="User interaction tests" parallel="methods" thread-count="5">
+        <classes>
+            <class name="com.solvd.apiTests.UserTest">
+                <methods>
+                    <include name="verifyGetUserByIdTest"/>
+                    <include name="verifyDeleteUserTest"/>
+                    <include name="verifyCreateUserTest"/>
+                    <include name="verifyUpdateUserPutTest"/>
+                    <include name="verifyUpdateUserPatchTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

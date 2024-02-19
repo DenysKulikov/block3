@@ -73,7 +73,7 @@ public class UserTest {
         updateUserPut.validateResponse(comparatorContext);
     }
 
-    @Test
+    @Test(enabled = true)
     public void verifyUpdateUserPatchTest() {
         User user = new User();
         user.setId(7);
