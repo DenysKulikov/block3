@@ -68,4 +68,8 @@ public class ManageCategoriesPage extends AbstractPage {
     public void typeToInputBar(String category) {
         input.type(category);
     }
+
+    public String getInputTextBarText() {
+        return input.getText();
+    }
 }

@@ -81,6 +81,9 @@ public class ToDoListTest extends AbstractTest implements IMobileUtils {
                 "Input Line is not Present");
 
         manageCategoriesPage.typeToInputBar(categoryName);
+        Assert.assertEquals(manageCategoriesPage.getInputTextBarText(), categoryName,
+                "Text does not entered");
+
         Category category = manageCategoriesPage.clickSaveCategoryButton();
 
         Assert.assertTrue(category.isCategoryPresent(),
